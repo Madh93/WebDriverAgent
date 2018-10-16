@@ -36,7 +36,7 @@ extern NSString *const FBApplicationCrashedException;
 /**
  Fetches session for given identifier.
  If identifier doesn't match activeSession identifier, will return nil.
-
+ 
  @param identifier Identifier for searched session
  @return session. Can return nil if session does not exists
  */
@@ -44,7 +44,7 @@ extern NSString *const FBApplicationCrashedException;
 
 /**
  Creates and saves new session for application
-
+ 
  @param application The application that we want to create session for
  @return new session
  */
@@ -55,6 +55,38 @@ extern NSString *const FBApplicationCrashedException;
  */
 - (void)kill;
 
+/**
+ Launch an application with given bundle identifier in scope of current session.
+ !This method is only available since Xcode9 SDK
+ 
+ @param bundleIdentifier Valid bundle identifier of the application to be launched
+ @param shouldWaitForQuiescence whether to wait for quiescence on application startup
+ @param arguments The optional array of application command line arguments. The arguments are going to be applied if the application was not running before.
+ @param environment The optional dictionary of environment variables for the application, which is going to be executed. The environment variables are going to be applied if the application was not running before.
+ @throws FBApplicationMethodNotSupportedException if the method is not supported with the current XCTest SDK
+ */
+- (void)launchApplicationWithBundleId:(NSString *)bundleIdentifier
+              shouldWaitForQuiescence:(nullable NSNumber *)shouldWaitForQuiescence
+                            arguments:(nullable NSArray<NSString *> *)arguments
+                          environment:(nullable NSDictionary <NSString *, NSString *> *)environment;
+
+/**
+ Activate an application with given bundle identifier in scope of current session.
+ !This method is only available since Xcode9 SDK
+ 
+ @param bundleIdentifier Valid bundle identifier of the application to be activated
+ @throws FBApplicationMethodNotSupportedException if the method is not supported with the current XCTest SDK
+ */
+- (void)activateApplicationWithBundleId:(NSString *)bundleIdentifier;
+
+/**
+ Terminate an application with the given bundle id. The application should be previously
+ executed by launchApplicationWithBundleId method or passed to the init method.
+ 
+ @param bundleIdentifier Valid bundle identifier of the application to be terminated
+ @return Either YES if the app has been successfully terminated or NO if it was not running
+ */
+- (BOOL)terminateApplicationWithBundleId:(NSString *)bundleIdentifier;
 @end
 
 NS_ASSUME_NONNULL_END

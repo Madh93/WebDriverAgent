@@ -40,6 +40,9 @@
     [[FBRoute POST:@"/wda/keyboard/dismiss"] respondWithTarget:self action:@selector(handleDismissKeyboardCommand:)],
     [[FBRoute GET:@"/wda/elementCache/size"] respondWithTarget:self action:@selector(handleGetElementCacheSizeCommand:)],
     [[FBRoute POST:@"/wda/elementCache/clear"] respondWithTarget:self action:@selector(handleClearElementCacheCommand:)],
+    [[FBRoute POST:@"/wda/apps/launch"] respondWithTarget:self action:@selector(handleAppLaunch:)],
+    [[FBRoute POST:@"/wda/apps/activate"] respondWithTarget:self action:@selector(handleAppActivate:)],
+    [[FBRoute POST:@"/wda/apps/terminate"] respondWithTarget:self action:@selector(handleAppTerminate:)]
   ];
 }
 
@@ -111,6 +114,27 @@
   FBElementCache *elementCache = request.session.elementCache;
   [elementCache clear];
   return FBResponseWithOK();
+}
+
++ (id<FBResponsePayload>)handleAppLaunch:(FBRouteRequest *)request
+{
+  [request.session launchApplicationWithBundleId:(id)request.arguments[@"bundleId"]
+                         shouldWaitForQuiescence:request.arguments[@"shouldWaitForQuiescence"]
+                                       arguments:request.arguments[@"arguments"]
+                                     environment:request.arguments[@"environment"]];
+  return FBResponseWithOK();
+}
+
++ (id<FBResponsePayload>)handleAppActivate:(FBRouteRequest *)request
+{
+  [request.session activateApplicationWithBundleId:(id)request.arguments[@"bundleId"]];
+  return FBResponseWithOK();
+}
+
++ (id<FBResponsePayload>)handleAppTerminate:(FBRouteRequest *)request
+{
+  BOOL result = [request.session terminateApplicationWithBundleId:(id)request.arguments[@"bundleId"]];
+  return FBResponseWithStatus(FBCommandStatusNoError, @(result));
 }
 
 #pragma mark - Helpers
