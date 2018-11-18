@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015-present, Facebook, Inc.
+ * Copyright (c) 2018-present, Facebook, Inc.
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -8,14 +8,17 @@
  */
 
 #import <XCTest/XCTest.h>
+#import "FBElement.h"
 
-#if !TARGET_OS_TV
+NS_ASSUME_NONNULL_BEGIN
 
-@interface XCUICoordinate (FBFix)
+@interface XCUIApplication (FBFocused)
 
-- (CGPoint)fb_screenPoint;
+/**
+ Return current focused element
+  */
+- (id<FBElement>) fb_focusedElement;
 
 @end
 
-#endif
-
+NS_ASSUME_NONNULL_END
