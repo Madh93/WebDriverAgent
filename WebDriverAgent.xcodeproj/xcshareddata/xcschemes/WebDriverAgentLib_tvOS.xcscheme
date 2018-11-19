@@ -67,6 +67,26 @@
                ReferencedContainer = "container:WebDriverAgent.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1C3C6FA821184F2D00FAFD69"
+               BuildableName = "IntegrationTests_1_tvOS.xctest"
+               BlueprintName = "IntegrationTests_1_tvOS"
+               ReferencedContainer = "container:WebDriverAgent.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1CEC81812199B6630071306F"
+               BuildableName = "IntegrationTests_2_tvOS.xctest"
+               BlueprintName = "IntegrationTests_2_tvOS"
+               ReferencedContainer = "container:WebDriverAgent.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
