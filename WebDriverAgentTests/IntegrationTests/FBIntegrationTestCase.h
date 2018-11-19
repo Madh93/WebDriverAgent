@@ -9,7 +9,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import "FBHomeboardApplication.h"
+#import "WebDriverAgentLib/FBHomeboardApplication.h"
 
 extern NSString *const FBShowAlertButtonName;
 extern NSString *const FBShowSheetAlertButtonName;
